@@ -22,9 +22,9 @@ public class Pet
 	private Integer age;
 	private Double price;
 	
-	//@ManyToOne
-	//@JoinColumn(name="category_id")
-	// private PetCategory category;
+	@ManyToOne
+	@JoinColumn(name="category_id")
+	 private PetCategory petCategory;
 	
 	private String description;
 	@Column(name = "image_url")
