@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.cg.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -29,12 +29,11 @@ public class Employee {
     @Column(length = 100)
     private String email;
 
-    // Many employees can have one address
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
 
-    // Constructors
+   
     public Employee() {}
 
     public Employee(int employeeId, String firstName, String lastName, String position,
