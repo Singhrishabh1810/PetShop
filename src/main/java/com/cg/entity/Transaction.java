@@ -19,7 +19,7 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private Customers customer;
 
     @ManyToOne
     @JoinColumn(name = "pet_id")
@@ -63,11 +63,11 @@ public class Transaction {
         this.transactionStatus = transactionStatus;
     }
 
-    public Customer getCustomer() {
+    public Customers getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(Customers customer) {
         this.customer = customer;
     }
 
