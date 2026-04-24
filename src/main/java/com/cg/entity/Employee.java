@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
+
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -40,13 +41,13 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "address_id")
-    private Address address;
+    private Addresses address;
 
    
     public Employee() {}
 
     public Employee(int employeeId, String firstName, String lastName, String position,
-                    LocalDate hireDate, String phoneNumber, String email, Address address) {
+                    LocalDate hireDate, String phoneNumber, String email, Addresses address) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -115,11 +116,11 @@ public class Employee {
         this.email = email;
     }
 
-    public Address getAddress() {
+    public Addresses getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(Addresses address) {
         this.address = address;
     }
 }
