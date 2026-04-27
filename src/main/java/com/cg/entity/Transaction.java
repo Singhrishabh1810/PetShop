@@ -9,11 +9,11 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int transactionId;
+    private Integer transactionId;
 
     private LocalDate transactionDate;
 
-    private double amount;
+    private Double amount;
 
     private String transactionStatus;
 
@@ -25,57 +25,65 @@ public class Transaction {
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
-    public Transaction() {}
+    public Integer getTransactionId() {
+		return transactionId;
+	}
 
-    public Transaction(LocalDate transactionDate, double amount, String transactionStatus) {
-        this.transactionDate = transactionDate;
-        this.amount = amount;
-        this.transactionStatus = transactionStatus;
-    }
+	public void setTransactionId(Integer transactionId) {
+		this.transactionId = transactionId;
+	}
 
-    // getters and setters
+	public LocalDate getTransactionDate() {
+		return transactionDate;
+	}
 
-    public int getTransactionId() {
-        return transactionId;
-    }
+	public void setTransactionDate(LocalDate transactionDate) {
+		this.transactionDate = transactionDate;
+	}
 
-    public LocalDate getTransactionDate() {
-        return transactionDate;
-    }
+	public Double getAmount() {
+		return amount;
+	}
 
-    public void setTransactionDate(LocalDate transactionDate) {
-        this.transactionDate = transactionDate;
-    }
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
 
-    public double getAmount() {
-        return amount;
-    }
+	public String getTransactionStatus() {
+		return transactionStatus;
+	}
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
+	public void setTransactionStatus(String transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
 
-    public String getTransactionStatus() {
-        return transactionStatus;
-    }
+	public Customers getCustomer() {
+		return customer;
+	}
 
-    public void setTransactionStatus(String transactionStatus) {
-        this.transactionStatus = transactionStatus;
-    }
+	public void setCustomer(Customers customer) {
+		this.customer = customer;
+	}
 
-    public Customers getCustomer() {
-        return customer;
-    }
+	public Pet getPet() {
+		return pet;
+	}
 
-    public void setCustomer(Customers customer) {
-        this.customer = customer;
-    }
+	public void setPet(Pet pet) {
+		this.pet = pet;
+	}
 
-    public Pet getPet() {
-        return pet;
-    }
+	public Transaction() {}
 
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
-}
+	public Transaction(Integer transactionId, LocalDate transactionDate, Double amount, String transactionStatus,
+			Customers customer, Pet pet) {
+		super();
+		this.transactionId = transactionId;
+		this.transactionDate = transactionDate;
+		this.amount = amount;
+		this.transactionStatus = transactionStatus;
+		this.customer = customer;
+		this.pet = pet;
+	}
+
+   }
