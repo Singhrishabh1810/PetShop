@@ -1,0 +1,3 @@
+public interface PetFoodRepository extends JpaRepository<PetFood, Integer> {
+    
+}
