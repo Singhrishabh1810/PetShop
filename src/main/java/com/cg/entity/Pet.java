@@ -26,6 +26,12 @@ public class Pet
 	@JoinColumn(name="category_id")
 	 private PetCategory petCategory;
 	
+	public PetCategory getPetCategory() {
+		return petCategory;
+	}
+	public void setPetCategory(PetCategory petCategory) {
+		this.petCategory = petCategory;
+	}
 	private String description;
 	@Column(name = "image_url")
 	private String imageUrl;

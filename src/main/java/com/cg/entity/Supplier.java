@@ -27,6 +27,10 @@ public class Supplier
 
 	private String email;
 	
+	@ManyToOne
+    @JoinColumn(name = "address_id")
+    private Addresses address;
+	
 	public Integer getSupplierId() {
 		return supplierId;
 	}
@@ -75,7 +79,5 @@ public class Supplier
 		this.address = address;
 	}
 
-	@ManyToOne
-    @JoinColumn(name = "address_id")
-    private Addresses address;
+	
 }
