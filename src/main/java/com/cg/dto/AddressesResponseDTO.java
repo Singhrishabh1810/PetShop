@@ -1,7 +1,5 @@
 package com.cg.dto;
 
-import java.util.List;
-
 public class AddressesResponseDTO {
 	
 	private Integer addressId;
@@ -9,26 +7,20 @@ public class AddressesResponseDTO {
     private String city;
     private String state;
     private String zipCode;
-
-    private List<Integer> customerIds;
-    private List<Integer> supplierIds;
-    private List<Integer> employeeIds;
     
     public AddressesResponseDTO() {
     }
+
     
-	public AddressesResponseDTO(Integer addressId, String street, String city, String state, String zipCode,
-			List<Integer> customerIds, List<Integer> supplierIds, List<Integer> employeeIds) {
+	public AddressesResponseDTO(Integer addressId, String street, String city, String state, String zipCode) {
 		super();
 		this.addressId = addressId;
 		this.street = street;
 		this.city = city;
 		this.state = state;
 		this.zipCode = zipCode;
-		this.customerIds = customerIds;
-		this.supplierIds = supplierIds;
-		this.employeeIds = employeeIds;
 	}
+
 
 	public Integer getAddressId() {
 		return addressId;
@@ -69,30 +61,7 @@ public class AddressesResponseDTO {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-
-	public List<Integer> getCustomerIds() {
-		return customerIds;
-	}
-
-	public void setCustomerIds(List<Integer> customerIds) {
-		this.customerIds = customerIds;
-	}
-
-	public List<Integer> getSupplierIds() {
-		return supplierIds;
-	}
-
-	public void setSupplierIds(List<Integer> supplierIds) {
-		this.supplierIds = supplierIds;
-	}
-
-	public List<Integer> getEmployeeIds() {
-		return employeeIds;
-	}
-
-	public void setEmployeeIds(List<Integer> employeeIds) {
-		this.employeeIds = employeeIds;
-	}
     
+	
     
 }

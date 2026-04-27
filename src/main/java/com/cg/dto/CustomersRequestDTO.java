@@ -1,5 +1,6 @@
 package com.cg.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 public class CustomersRequestDTO {
@@ -20,19 +21,30 @@ public class CustomersRequestDTO {
     @Pattern(regexp = "^[6-9][0-9]{9}$", message = "Phone number must be a valid 10-digit Indian mobile number")
     private String phoneNumber;
 
-    @NotNull(message = "Address ID cannot be null")
     private Integer addressId;
+    
+    @Valid
+    private AddressesRequestDTO address;
     
     public CustomersRequestDTO() {
     }
     
-    public CustomersRequestDTO(String firstName, String lastName, String email,String phoneNumber, Integer addressId) {
+    public CustomersRequestDTO(String firstName, String lastName, String email,String phoneNumber, Integer addressId,AddressesRequestDTO address) {
     		this.firstName = firstName;
     		this.lastName = lastName;
     		this.email = email;
     		this.phoneNumber = phoneNumber;
     		this.addressId = addressId;
+    		this.address = address;
     }
+
+	public AddressesRequestDTO getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressesRequestDTO address) {
+		this.address = address;
+	}
 
 	public String getFirstName() {
 		return firstName;
