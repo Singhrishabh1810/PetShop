@@ -6,7 +6,7 @@ import com.cg.dto.EmployeeRequestDTO;
 import com.cg.dto.EmployeeResponseDTO;
 
 public interface EmployeeService {
-
+	
 	EmployeeResponseDTO createEmployee(EmployeeRequestDTO requestDTO);
 
     EmployeeResponseDTO getEmployeeById(int employeeId);
@@ -18,4 +18,5 @@ public interface EmployeeService {
     EmployeeResponseDTO updateEmployee(int employeeId, EmployeeRequestDTO requestDTO);
 
     void deleteEmployee(int employeeId);
+
 }

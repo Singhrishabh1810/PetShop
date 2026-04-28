@@ -1,21 +1,21 @@
 package com.cg.service;
 
-import com.cg.dto.GroomingServicesRequestDTO;
-import com.cg.dto.GroomingServicesResponseDTO;
+import com.cg.dto.GroomingServiceRequestDTO;
+import com.cg.dto.GroomingServiceResponseDTO;
 import java.util.*;
 
 public interface GroomingServicesService {
-	GroomingServicesResponseDTO createService(GroomingServicesRequestDTO requestDTO);
+	GroomingServiceResponseDTO createService(GroomingServiceRequestDTO requestDTO);
 
-    GroomingServicesResponseDTO getServiceById(int serviceId);
+    GroomingServiceResponseDTO getServiceById(int serviceId);
 
-    List<GroomingServicesResponseDTO> getAllServices();
+    List<GroomingServiceResponseDTO> getAllServices();
 
-    List<GroomingServicesResponseDTO> getAvailableServices();
+    List<GroomingServiceResponseDTO> getAvailableServices();
 
-    GroomingServicesResponseDTO updateService(int serviceId, GroomingServicesRequestDTO requestDTO);
+    GroomingServiceResponseDTO updateService(int serviceId, GroomingServiceRequestDTO requestDTO);
 
-    GroomingServicesResponseDTO toggleAvailability(int serviceId);
+    GroomingServiceResponseDTO toggleAvailability(int serviceId);
 
     void deleteService(int serviceId);
 

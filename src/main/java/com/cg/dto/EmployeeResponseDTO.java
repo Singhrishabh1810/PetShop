@@ -11,13 +11,13 @@ public class EmployeeResponseDTO {
     private LocalDate hireDate;
     private String phoneNumber;
     private String email;
-    private AddressesResponseDTO address;
+    private AdressesResponseDTO address;
 
     public EmployeeResponseDTO() {}
 
     public EmployeeResponseDTO(int employeeId, String firstName, String lastName,
                                 String position, LocalDate hireDate, String phoneNumber,
-                                String email, AddressesResponseDTO address) {
+                                String email, AdressesResponseDTO address ) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -49,6 +49,6 @@ public class EmployeeResponseDTO {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public AddressesResponseDTO getAddress() { return address; }
-    public void setAddress(AddressesResponseDTO address) { this.address = address; }
+    public AdressesResponseDTO getAddress() { return address; }
+    public void setAddress(AdressesResponseDTO address) { this.address = address; }
 }

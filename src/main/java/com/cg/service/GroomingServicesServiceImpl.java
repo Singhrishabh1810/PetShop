@@ -1,52 +1,120 @@
 package com.cg.service;
 
+import com.cg.dto.GroomingServiceRequestDTO;
+import com.cg.dto.GroomingServiceResponseDTO;
+import com.cg.entity.GroomingServices;
+import com.cg.exception.ResourceNotFoundException;
+import com.cg.repo.GroomingServicesRepository;
+import com.cg.service.GroomingServicesService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
-import com.cg.dto.GroomingServicesRequestDTO;
-import com.cg.dto.GroomingServicesResponseDTO;
+@Service
+@Transactional
+public class GroomingServicesServiceImpl implements GroomingServicesService {
 
-public class GroomingServicesServiceImpl implements GroomingServicesService{
+    @Autowired
+    private GroomingServicesRepository groomingServicesRepository;
 
-	@Override
-	public GroomingServicesResponseDTO createService(GroomingServicesRequestDTO requestDTO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // ---------------------- Helper: Entity -> ResponseDTO ----------------------
+    private GroomingServiceResponseDTO mapToResponseDTO(GroomingServices entity) {
+        return new GroomingServiceResponseDTO(
+            entity.getServiceId(),
+            entity.getName(),
+            entity.getDescription(),
+            entity.getPrice(),
+            entity.isAvailable()
+        );
+    }
 
-	@Override
-	public GroomingServicesResponseDTO getServiceById(int serviceId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // ---------------------- Helper: RequestDTO -> Entity ----------------------
+    private GroomingServices mapToEntity(GroomingServiceRequestDTO dto) {
+        GroomingServices service = new GroomingServices();
+        service.setName(dto.getName());
+        service.setDescription(dto.getDescription());
+        service.setPrice(dto.getPrice());
+        service.setAvailable(dto.getAvailable());
+        return service;
+    }
 
-	@Override
-	public List<GroomingServicesResponseDTO> getAllServices() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // ---------------------- Create ----------------------
+    @Override
+    public GroomingServiceResponseDTO createService(GroomingServiceRequestDTO requestDTO) {
+        GroomingServices service = mapToEntity(requestDTO);
+        GroomingServices saved = groomingServicesRepository.save(service);
+        return mapToResponseDTO(saved);
+    }
 
-	@Override
-	public List<GroomingServicesResponseDTO> getAvailableServices() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // ---------------------- Get By ID ----------------------
+    @Override
+    @Transactional(readOnly = true)
+    public GroomingServiceResponseDTO getServiceById(int serviceId) {
+        GroomingServices service = groomingServicesRepository.findById(serviceId)
+            .orElseThrow(() -> new ResourceNotFoundException(
+                "Grooming service not found with ID: " + serviceId));
+        return mapToResponseDTO(service);
+    }
 
-	@Override
-	public GroomingServicesResponseDTO updateService(int serviceId, GroomingServicesRequestDTO requestDTO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // ---------------------- Get All ----------------------
+    @Override
+    @Transactional(readOnly = true)
+    public List<GroomingServiceResponseDTO> getAllServices() {
+        return groomingServicesRepository.findAll()
+            .stream()
+            .map(this::mapToResponseDTO)
+            .collect(Collectors.toList());
+    }
 
-	@Override
-	public GroomingServicesResponseDTO toggleAvailability(int serviceId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // ---------------------- Get Available Only ----------------------
+    @Override
+    @Transactional(readOnly = true)
+    public List<GroomingServiceResponseDTO> getAvailableServices() {
+        return groomingServicesRepository.findByAvailableTrue()
+            .stream()
+            .map(this::mapToResponseDTO)
+            .collect(Collectors.toList());
+    }
 
-	@Override
-	public void deleteService(int serviceId) {
-		// TODO Auto-generated method stub
-		
-	}
+    // ---------------------- Update ----------------------
+    @Override
+    public GroomingServiceResponseDTO updateService(int serviceId,
+                                                     GroomingServiceRequestDTO requestDTO) {
+        GroomingServices existing = groomingServicesRepository.findById(serviceId)
+            .orElseThrow(() -> new ResourceNotFoundException(
+                "Grooming service not found with ID: " + serviceId));
 
+        existing.setName(requestDTO.getName());
+        existing.setDescription(requestDTO.getDescription());
+        existing.setPrice(requestDTO.getPrice());
+        existing.setAvailable(requestDTO.getAvailable());
+
+        GroomingServices updated = groomingServicesRepository.save(existing);
+        return mapToResponseDTO(updated);
+    }
+
+    // ---------------------- Toggle Availability ----------------------
+    @Override
+    public GroomingServiceResponseDTO toggleAvailability(int serviceId) {
+        GroomingServices existing = groomingServicesRepository.findById(serviceId)
+            .orElseThrow(() -> new ResourceNotFoundException(
+                "Grooming service not found with ID: " + serviceId));
+
+        existing.setAvailable(!existing.isAvailable());
+        GroomingServices updated = groomingServicesRepository.save(existing);
+        return mapToResponseDTO(updated);
+    }
+
+    // ---------------------- Delete ----------------------
+    @Override
+    public void deleteService(int serviceId) {
+        GroomingServices existing = groomingServicesRepository.findById(serviceId)
+            .orElseThrow(() -> new ResourceNotFoundException(
+                "Grooming service not found with ID: " + serviceId));
+        groomingServicesRepository.delete(existing);
+    }
 }
